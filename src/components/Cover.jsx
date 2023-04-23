@@ -1,7 +1,7 @@
 export default function Cover({image, title, overview}){
     return(
         <div className="bg-zinc-300 h-screen w-screen relative" style={{
-            background: `url('${image}')`,
+            background: `url('https://image.tmdb.org/t/p/original${image}')`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
