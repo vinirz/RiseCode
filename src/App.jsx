@@ -2,6 +2,7 @@ import Cover from './components/Cover';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import Card from './components/Card';
+import Header from './components/Header';
 
 export default function App(){
 
@@ -18,7 +19,8 @@ export default function App(){
 
   return(
       <div className="h-screen w-screen bg-zinc-800 overflow-x-hidden">
-          {
+          <Header></Header>
+          { 
             movies.length > 0 ? (
               <>
                 <Cover image={movies[0].backdrop_path} title={movies[0].title} overview={movies[0].overview}/>
