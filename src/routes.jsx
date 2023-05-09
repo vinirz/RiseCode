@@ -1,10 +1,11 @@
 import Trend from './views/Trend';
 import Favorites from './views/Favorites';
 import Explorer from './views/Explorer'
-import SettingsView from './views/Settings';
+import Settings from './views/Settings';
 import Login from './views/Login';
 import CreateAccount from './views/CreateAccount';
 import Categories from './views/Categories';
+import Menu from './components/Menu';
 
 import { Routes, Route} from 'react-router-dom'
 
@@ -15,15 +16,41 @@ export default function RoutesDefinition(){
 
             <Route path='/createAccount' element={<CreateAccount/>}></Route>
             
-            <Route path='/trend' element={<Trend/>}></Route>
-
-            <Route path='/favorites' element={<Favorites/>}></Route>
-
-            <Route path='/categories' element={<Categories/>}></Route>
+            <Route path='/explorer' element={
+                <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                    <Menu/>
+                    <Explorer/>
+                </div>
+            }></Route>
             
-            <Route path='/settings' element={<SettingsView/>}></Route>
+            <Route path='/trend' element={
+                <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                    <Menu/>
+                    <Trend/>
+                </div>
+            }></Route>
+            
+            <Route path='/favorites' element={
+                <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                    <Menu/>
+                    <Favorites/>
+                </div>
+            }></Route>
+              
+            <Route path='/categories' element={
+                <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                    <Menu/>
+                    <Categories/>
+                </div>
+            }></Route>
+              
+            <Route path='/settings' element={
+                <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                    <Menu/>
+                    <Settings/>
+                </div>
+            }></Route>
 
-            <Route path='/explorer' element={<Explorer/>}></Route>
         </Routes>   
     )
 }
