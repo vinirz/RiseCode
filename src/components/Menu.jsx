@@ -36,6 +36,26 @@ export default function Menu(){
                             </li>
                         </ul>
                     </nav>
+
+                    <div className='flex flex-col items-start gap-8'>
+                    <h1 className='text-lg'>Continuar assistindo</h1>
+                    <ul className='flex flex-col gap-10 w-full'>
+                        <li className="flex items-end gap-4 cursor-pointer">
+                            <div className='h-12 aspect-square rounded-full items-center bg-zinc-700'>
+                                <img src="" className='object-cover'/>
+                            </div>
+                            <span>
+                                <h1 className='text-md leading-8 '>Movie Name</h1>
+                                <div className='bg-zinc-700 h-1 w-full'>
+                                    <div className='bg-emerald-400 h-1 w-1/2'></div>
+                                </div>
+                                <h1 className='text-xs'>48:35</h1>
+                            </span>
+
+                        </li>
+                    </ul>
+                    </div>
+
                 </div>
             </div>
         </>
