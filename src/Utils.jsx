@@ -44,3 +44,40 @@ export function Logar(mail, pass){
     })))
 
 }
+
+export async function Cadastrar(mail, name, pass, pic){
+    var picture
+  
+    if(typeof(pic) != 'object'){
+      picture = "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+    }else{
+      picture = await uploadImage(pic)
+    }
+    return new Promise ((resolve, reject) => (
+      base('Users').select({
+        filterByFormula: `email='${mail}'`
+      }).firstPage((err, records) => {
+        if(err){
+          console.log(err)
+          reject(err)
+        }
+  
+        if(records.length > 0){
+          toast('Email já cadastrado')
+        } else {
+          base('Users').create(
+            {
+              email: mail,
+              name: name,
+              password: SHA256(pass).toString(),
+              picture: picture,
+              favorites: '[]',
+              subs: '[]'
+            }
+          )
+            resolve(true)
+        }
+      })
+    ))
+      
+  }
