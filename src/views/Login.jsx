@@ -1,4 +1,6 @@
 import { createRef } from "react"
+import { Logar } from "../Utils"
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'
 
 export default function Login(){
@@ -8,7 +10,13 @@ export default function Login(){
     const navigate = useNavigate()
 
     function handleLogin(){
-        navigate('/explorer')
+        Logar(Mail.current.value, Password.current.value)
+        .then((match) => {
+            if(match){
+                localStorage.setItem('user', JSON.stringify(match))
+                window.location.href = '/explorer'
+            }
+        })
     }
 
     return(
