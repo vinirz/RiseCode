@@ -5,6 +5,7 @@ import Settings from './views/Settings';
 import Login from './views/Login';
 import CreateAccount from './views/CreateAccount';
 import Categories from './views/Categories';
+import Play from './views/Play'
 import Menu from './components/Menu';
 
 import { Routes, Route} from 'react-router-dom'
@@ -48,6 +49,13 @@ export default function RoutesDefinition(){
                 <div className='flex h-screen overflow-hidden bg-zinc-800'>
                     <Menu/>
                     <Settings/>
+                </div>
+            }></Route>
+
+            <Route path='/play/:id' element={
+                <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                    <Menu/>
+                    <Play/>
                 </div>
             }></Route>
 

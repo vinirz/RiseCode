@@ -1,16 +1,39 @@
-export default function Cover({backdrop, title, overview}){
+import { useNavigate } from "react-router-dom"
 
-    return(
-      <div className={`w-full h-96 rounded-lg relative overflow-hidden cursor-pointer`}>
-            <div className="flex relative">
-              <span className="absolute top-10 left-10 z-10 flex flex-col gap-5 w-3/4">
-                <h1 className="text-7xl font-medium text-zinc-200">{title}</h1>
-                <h1 className="text-xl font-normal text-zinc-200">{overview.length > 300 ? overview.substring(0,300) + '...' : overview}</h1>
-              </span>
-  
+export default function Cover({video, title, channel, id}){
+
+  const channelInfo = JSON.parse(channel)
+
+  const navigate = useNavigate()
+
+    function handlePlay(){
+        navigate(`/play/${id}`)
+    }
+
+  return(
+    <div className={`w-full h-96 rounded-lg relative overflow-hidden cursor-pointer`} onClick={() => handlePlay()}>
+          <div className="flex relative">
               <div className="bg-gradient-to-t from-black to-black/70 h-full w-full absolute"></div>
-              <img src={`https://image.tmdb.org/t/p/original${backdrop}`} className="" />
+              <video preload="auto" muted autoPlay loop className="w-full">
+                  <source src={video}/>
+              </video>
+          </div>
+        <div className="absolute bg-gradient-to-r from-black/75 to-black/40 h-full w-full"></div>
+
+        <div className="px-10 absolute bottom-10 text-zinc-200 flex justify-between items-end h-32 w-full">
+            <div className='flex items-end gap-4'>
+            <span className='flex bg-zinc-700 gap-2 px-2 items-center justify-center h-20 aspect-square rounded-full' style={{
+                        background: `url(${channelInfo.picture})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover'
+                    }}></span>
+                <span>
+                    <h1 className="text-4xl font-semibold whitespace-nowrap">{title}</h1>
+                    <h1 className='text-xl'>{channelInfo.name}</h1>
+                </span>
             </div>
-      </div>
-    )
-  }
+        </div>
+      
+    </div>
+  )
+}
