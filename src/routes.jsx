@@ -54,7 +54,6 @@ export default function RoutesDefinition(){
 
             <Route path='/play/:id' element={
                 <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Menu/>
                     <Play/>
                 </div>
             }></Route>

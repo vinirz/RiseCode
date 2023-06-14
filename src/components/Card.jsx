@@ -7,7 +7,7 @@ export default function Card({title = '', channel = '', video, id}){
     const navigate = useNavigate()
 
     function handlePlay(){
-        navigate(`/play/`)
+        navigate(`/play/${id}`)
     }
 
     return(
