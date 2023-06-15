@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import Airtable from "airtable"
 import { Heart, ArrowLeft } from 'react-feather';
-import { User } from "../Utils";
+import { User, addFavorite, removeFavorite } from "../Utils";
 
 export default function(){
     const base = new Airtable({ apiKey: 'keymZeqCHaPAJcsxx' }).base('appWSfcNcPT8jjHkD');
     const {id} = useParams()
+    const auth = User.getUser()
     const [movie, setMovie] = useState(null)
     const [fav, setFav] = useState(false)
     const navigate = useNavigate(false)
@@ -28,6 +29,30 @@ export default function(){
 
     }, [])
 
+    useEffect(()=>{
+        base('Users').select({
+            filterByFormula: `email='${auth.email}'`
+          }).firstPage((err, records) => {
+            if(err){
+              console.log(err)
+            }
+        
+            const currentFavorites = records[0].fields.favorites
+    
+            if(currentFavorites != undefined){
+                const array = JSON.parse(currentFavorites)
+                array.forEach(element => {
+                    if(element.ID === movie.ID){
+                        setFav(true)
+                    }
+                });
+    
+            } else {
+                setFav(false)
+            }
+          })
+    }, [movie])
+
     
     return (
         <>
@@ -45,7 +70,15 @@ export default function(){
                                 <h1 className="text-4xl font-semibold">{movie.title}</h1>
 
                                 <span className="flex items-center justify-between gap-10">
-                                    <Heart size={40} onClick={() =>{setFav(!fav)}} fill={fav ? '#e4e4e7' : 'transparent'}/>
+                                    <Heart size={40} onClick={() =>{
+                                        if(fav){
+                                            removeFavorite(movie)
+                                        } else (
+                                            addFavorite(movie)
+                                        )
+                                        
+                                        setFav(!fav)}
+                                    } fill={fav ? '#e4e4e7' : 'transparent'}/>
                                     <h1 className="text-4xl font-semibold">{movie.views} views</h1>
                                 </span>
                             </div>

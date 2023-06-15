@@ -14,6 +14,8 @@ export const User = {
     }
 }
 
+const auth = User.getUser()
+
 const base = new Airtable({ apiKey: 'keymZeqCHaPAJcsxx' }).base('appWSfcNcPT8jjHkD');
 
 export function Logar(mail, pass){
@@ -80,4 +82,54 @@ export async function Cadastrar(mail, name, pass, pic){
       })
     ))
       
+  }
+
+  export function addFavorite(favorite){
+    base('Users').select({
+      filterByFormula: `email='${auth.email}'`
+    }).firstPage((err, records) => {
+      if(err){
+        console.log(err)
+      }
+  
+      const currentFavorites = records[0].fields.favorites
+  
+      if(currentFavorites){
+        const newFavorites = JSON.parse(currentFavorites)
+        newFavorites.push(favorite)
+  
+        console.log(newFavorites)
+  
+        records[0].updateFields({
+          favorites: JSON.stringify(newFavorites)
+        })
+  
+      } else {
+        records[0].updateFields({
+          favorites: JSON.stringify(favorite)
+        })
+      }
+    })
+  }
+  
+  export function removeFavorite(favorite){
+    base('Users').select({
+      filterByFormula: `email='${auth.email}'`
+    }).firstPage((err, records) => {
+      if(err){
+        console.log(err)
+      }
+  
+      const currentFavorites = records[0].fields.favorites
+  
+      if(currentFavorites){
+        const newFavorites = JSON.parse(currentFavorites)
+        newFavorites.pop(favorite)
+  
+        records[0].updateFields({
+          favorites: JSON.stringify(newFavorites)
+        })
+  
+      }
+    })
   }
