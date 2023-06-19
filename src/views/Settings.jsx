@@ -24,7 +24,7 @@ export default function SettingsView(){
                                 <h1>Salvar alterações</h1>
                             </span>
                         </button>
-                        <button className="bg-zinc-500 mt-5 w-72 h-11 group rounded-full flex items-center justify-center overflow-hidden relative" onClick={() => {navigate('/')}}>
+                        <button className="bg-zinc-500 mt-5 w-72 h-11 group rounded-full flex items-center justify-center overflow-hidden relative" onClick={() => {localStorage.clear(), window.location.reload()}}>
                             <span className='absolute bg-red-400 left-[-900px] group-hover:left-0 h-full w-full transition-all'></span>
                             <span className='z-10 flex gap-4 text-xl items-center justify-center text-zinc-200 group-hover:text-red-800'>
                                 <h1>Sair</h1>

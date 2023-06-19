@@ -8,7 +8,12 @@ import Categories from './views/Categories';
 import Play from './views/Play'
 import Menu from './components/Menu';
 
-import { Routes, Route} from 'react-router-dom'
+import { Routes, Route, Navigate} from 'react-router-dom'
+import { User } from './Utils';
+
+const PrivateRoute = ({children, redirectTo}) => {
+    return User.isAuthenticated() ? children : <Navigate to={redirectTo}/>
+}
 
 export default function RoutesDefinition(){
     return (
@@ -16,48 +21,59 @@ export default function RoutesDefinition(){
             <Route path='/' element={<Login/>}></Route>
 
             <Route path='/createAccount' element={<CreateAccount/>}></Route>
-            
+
             <Route path='/explorer' element={
-                <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Menu/>
-                    <Explorer/>
-                </div>
+                <PrivateRoute redirectTo={'/'}>
+                    <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                        <Menu/>
+                        <Explorer/>
+                    </div>
+                </PrivateRoute>
             }></Route>
             
             <Route path='/trend' element={
-                <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Menu/>
-                    <Trend/>
-                </div>
+                <PrivateRoute redirectTo={'/'}>
+                    <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                        <Menu/>
+                        <Trend/>
+                    </div>
+                </PrivateRoute>
             }></Route>
             
             <Route path='/favorites' element={
-                <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Menu/>
-                    <Favorites/>
-                </div>
+                <PrivateRoute redirectTo={'/'}>
+                    <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                        <Menu/>
+                        <Favorites/>
+                    </div>
+                </PrivateRoute>
             }></Route>
               
             <Route path='/categories' element={
-                <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Menu/>
-                    <Categories/>
-                </div>
+                <PrivateRoute redirectTo={'/'}>
+                    <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                        <Menu/>
+                        <Categories/>
+                    </div>
+                </PrivateRoute>
             }></Route>
               
             <Route path='/settings' element={
-                <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Menu/>
-                    <Settings/>
-                </div>
+                <PrivateRoute redirectTo={'/'}>
+                    <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                        <Menu/>
+                        <Settings/>
+                    </div>
+                </PrivateRoute>
             }></Route>
 
             <Route path='/play/:id' element={
-                <div className='flex h-screen overflow-hidden bg-zinc-800'>
-                    <Play/>
-                </div>
+                <PrivateRoute redirectTo={'/'}>
+                    <div className='flex h-screen overflow-hidden bg-zinc-800'>
+                        <Play/>
+                    </div>
+                </PrivateRoute>
             }></Route>
-
-        </Routes>   
+        </Routes>
     )
 }
