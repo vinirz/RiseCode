@@ -1,4 +1,4 @@
-import { Compass, Heart, Settings, ChevronsUp, List } from 'react-feather';
+import { Compass, Heart, Settings, ChevronsUp, Video } from 'react-feather';
 import {Link, useLocation} from 'react-router-dom'
 
 export default function Menu(){
@@ -29,7 +29,7 @@ export default function Menu(){
                                 <Link id='favorites' to='/favorites' className='flex gap-5'><Heart/>Favoritos</Link>
                             </li>
                             <li> 
-                                <Link id='categories' to='/categories' className='flex gap-5'><List/>Categorias</Link>
+                                <Link id='studio' to='/studio' className='flex gap-5'><Video/>Studio</Link>
                             </li>
                             <li> 
                                 <Link id='settings' to='/settings' className='flex gap-5'><Settings/>Configurações</Link>

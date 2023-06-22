@@ -4,7 +4,7 @@ import Explorer from './views/Explorer'
 import Settings from './views/Settings';
 import Login from './views/Login';
 import CreateAccount from './views/CreateAccount';
-import Categories from './views/Categories';
+import Studio from './views/Studio';
 import Play from './views/Play'
 import Menu from './components/Menu';
 
@@ -49,11 +49,11 @@ export default function RoutesDefinition(){
                 </PrivateRoute>
             }></Route>
               
-            <Route path='/categories' element={
+            <Route path='/studio' element={
                 <PrivateRoute redirectTo={'/'}>
                     <div className='flex h-screen overflow-hidden bg-zinc-800'>
                         <Menu/>
-                        <Categories/>
+                        <Studio/>
                     </div>
                 </PrivateRoute>
             }></Route>
